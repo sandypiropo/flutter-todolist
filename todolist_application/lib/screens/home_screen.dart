@@ -61,6 +61,14 @@ class HomeScreen extends StatelessWidget {
                 child: Image.asset('assets/images/black.png'),
               ),
             ),
+            Text(
+            'TO DO LIST',
+              style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: byzantinum,
+              ),
+            ),
             Icon(
               Icons.menu,
               color: platinum,
