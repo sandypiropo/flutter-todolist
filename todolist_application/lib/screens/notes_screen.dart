@@ -1,19 +1,25 @@
+// lib/screens/notes_screen.dart
+
 import 'package:flutter/material.dart';
+import 'package:todolist_application/constants/colors.dart';
+import 'package:todolist_application/models/notebook.dart';  // Atualize para refletir o caminho correto
 
 class NotesScreen extends StatefulWidget {
+  final Notebook notebook;
+
+  NotesScreen({required this.notebook});
+
   @override
   _NotesScreenState createState() => _NotesScreenState();
 }
 
 class _NotesScreenState extends State<NotesScreen> {
-  List<String> notes = [];
-
   final TextEditingController _controller = TextEditingController();
 
   void _addNote() {
     if (_controller.text.isNotEmpty) {
       setState(() {
-        notes.add(_controller.text);
+        widget.notebook.notes.add(_controller.text);
         _controller.clear();
       });
     }
@@ -21,15 +27,16 @@ class _NotesScreenState extends State<NotesScreen> {
 
   void _deleteNote(int index) {
     setState(() {
-      notes.removeAt(index);
+      widget.notebook.notes.removeAt(index);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: platinum,
       appBar: AppBar(
-        title: Text('Notas'),
+        title: Text(widget.notebook.title),
       ),
       body: Column(
         children: [
@@ -41,7 +48,7 @@ class _NotesScreenState extends State<NotesScreen> {
                   child: TextField(
                     controller: _controller,
                     decoration: InputDecoration(
-                      labelText: 'Adicionar Nota',
+                      labelText: 'Adicionar afazeres',
                     ),
                   ),
                 ),
@@ -54,10 +61,10 @@ class _NotesScreenState extends State<NotesScreen> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: notes.length,
+              itemCount: widget.notebook.notes.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(notes[index]),
+                  title: Text(widget.notebook.notes[index]),
                   trailing: IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () => _deleteNote(index),

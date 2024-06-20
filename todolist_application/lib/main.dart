@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
-import 'screens/notes_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,9 +12,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter ToDo List',
       home: HomeScreen(),
-      routes: {
-        '/notes': (context) => NotesScreen(),
-      },
     );
   }
 }
